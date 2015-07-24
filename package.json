@@ -1,0 +1,16 @@
+{
+  "name": "simplecms",
+  "version": "0.0.0",
+  "description": "proof of concept for a simple cms, and cms only",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ken Grønnbeck",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^5.8.3",
+    "express": "^4.13.1",
+    "mongoose": "^4.0.8"
+  }
+}
