@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const PageDefinition = require('./page-definition');
-
-const pascalCase = (s) => s.replace(/(\w)(\w*)/g,
-        function(g0,g1,g2){return g1.toUpperCase() + g2.toLowerCase();});
+const pascalCase = require('./pascal-case');
 
 const typeMatching = (attributeType) => {
   switch (attributeType) {

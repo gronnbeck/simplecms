@@ -32,6 +32,10 @@ const FrontPage = PageFactory(FrontPageDefiniton);
 //   return console.log('Successfully saved FrontPage');
 // });
 
+const NameToPageMap = {
+  [FrontPageDefiniton.pageName.toLowerCase()]: FrontPage
+}
+
 app.get('/pageDefinitions', (req, res) => {
   PageDefinition
     .find({})
@@ -60,7 +64,9 @@ app.get('/pages/:pageDef?/:pageId?', (req, res) => {
   if (pageDef === null || pageDef === undefined || pageId == null || pageId === undefined)
     return res.status(404).send(notImplementedMessage);
   else {
-    return FrontPage
+    var page = NameToPageMap[pageDef.toLowerCase()]
+    if (page === null || page === undefined) return res.status(404).send(notImplementedMessage);
+    return  page
       .find({})
       .exec((err, pages) => {
         if (err) throw Error('What the error is not handled');
