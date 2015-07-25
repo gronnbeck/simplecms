@@ -65,7 +65,8 @@ app.get('/pages/:pageDef?/:pageId?', (req, res) => {
     return res.status(404).send(notImplementedMessage);
   else {
     var page = NameToPageMap[pageDef.toLowerCase()]
-    if (page === null || page === undefined) return res.status(404).send(notImplementedMessage);
+    if (page === null || page === undefined)
+      return res.status(404).send(notImplementedMessage);
     return  page
       .find({})
       .exec((err, pages) => {
