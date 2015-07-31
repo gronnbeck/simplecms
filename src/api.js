@@ -12,11 +12,10 @@ const FrontPageDefiniton = new PageDefinition({
 
 models.PageDefinition.init(FrontPageDefiniton);
 
-const FrontPage = PageFactory(FrontPageDefiniton);
+var register = require('./register');
+register.register(FrontPageDefiniton);
 
-const NameToPageMap = {
-  [FrontPageDefiniton.pageName.toLowerCase()]: FrontPage
-}
+const NameToPageMap = register.getMap();
 
 const getPageDefinitions = (req, res) => {
   PageDefinition
@@ -46,6 +45,7 @@ const getPages = (req, res) => {
   if (pageDef === null || pageDef === undefined || pageId == null || pageId === undefined)
     return res.status(404).send(notImplementedMessage);
   else {
+    console.log(NameToPageMap);
     var page = NameToPageMap[pageDef.toLowerCase()]
     if (page === null || page === undefined)
       return res.status(404).send(notImplementedMessage);
