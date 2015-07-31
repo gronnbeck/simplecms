@@ -21,6 +21,21 @@ const getPageDefinitions = (req, res) => {
     })
 }
 
+const getPage = (pageDefName, pageId, res) => {
+  const nameToPageMap = register.getMap();
+  const page = nameToPageMap[pageDefName.toLowerCase()]
+  if (page === null || page === undefined)
+    return res.status(404).send(notImplementedMessage);
+  return  page
+    .find({})
+    .exec((err, pages) => {
+      if (err) throw Error('What the error is not handled');
+      const id = parseInt(pageId);
+      if (pages.length < id) return res.status(404).send({ error: 'not found' });
+      return res.send(pages[id]);
+    });
+}
+
 const getPages = (req, res) => {
   const { pageDef: pageDef, pageId: pageId } = req.params;
   const notImplementedMessage = {
@@ -31,18 +46,7 @@ const getPages = (req, res) => {
   if (pageDef === null || pageDef === undefined || pageId == null || pageId === undefined)
     return res.status(404).send(notImplementedMessage);
   else {
-    const nameToPageMap = register.getMap();
-    const page = nameToPageMap[pageDef.toLowerCase()]
-    if (page === null || page === undefined)
-      return res.status(404).send(notImplementedMessage);
-    return  page
-      .find({})
-      .exec((err, pages) => {
-        if (err) throw Error('What the error is not handled');
-        const id = parseInt(pageId);
-        if (pages.length < id) return res.status(404).send({ error: 'not found' });
-        return res.send(pages[id]);
-      });
+    return getPage(pageDef, pageId, res);
   }
 }
 
