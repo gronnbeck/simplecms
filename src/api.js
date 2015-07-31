@@ -1,19 +1,7 @@
 const models = require('./models');
+var register = require('./register');
 
 const PageDefinition = models.PageDefinition.model;
-const PageFactory = models.PageFactory;
-
-const FrontPageDefiniton = new PageDefinition({
-  pageName: 'FrontPage',
-  attributes: [
-    { type: 'textField', attributeName: 'title', isRequired: true }
-  ]
-});
-
-models.PageDefinition.init(FrontPageDefiniton);
-
-var register = require('./register');
-register.register(FrontPageDefiniton);
 
 const NameToPageMap = register.getMap();
 
@@ -45,7 +33,6 @@ const getPages = (req, res) => {
   if (pageDef === null || pageDef === undefined || pageId == null || pageId === undefined)
     return res.status(404).send(notImplementedMessage);
   else {
-    console.log(NameToPageMap);
     var page = NameToPageMap[pageDef.toLowerCase()]
     if (page === null || page === undefined)
       return res.status(404).send(notImplementedMessage);
