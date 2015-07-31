@@ -1,7 +1,7 @@
 const models = require('./models');
 var register = require('./register');
 
-const PageDefinition = models.PageDefinition.model;
+const PageDefinition = models.PageDefinition.Model();
 
 const getPageDefinitions = (req, res) => {
   PageDefinition

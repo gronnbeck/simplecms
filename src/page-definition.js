@@ -49,8 +49,18 @@ const init = (pageDefinition) => {
   });
 }
 
+class PageDefinition {
+  constructor(options) {
+    this.model = new PageDefinitionModel(options);
+    init(this.model);
+  }
 
-module.exports = {
-  init: init,
-  model: PageDefinitionModel
-};
+  getModel() {
+    return this.model;
+  }
+
+  static Model () { return PageDefinitionModel; }
+}
+
+
+module.exports = PageDefinition;

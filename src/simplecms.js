@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const models = require('./models');
 const api = require('./api');
 
-const PageDefinition = models.PageDefinition.model;
+const PageDefinition = models.PageDefinition;
 const PageFactory = models.PageFactory;
 
 const FrontPageDefiniton = new PageDefinition({
@@ -12,8 +12,6 @@ const FrontPageDefiniton = new PageDefinition({
     { type: 'textField', attributeName: 'title', isRequired: true }
   ]
 });
-
-models.PageDefinition.init(FrontPageDefiniton);
 
 var register = require('./register');
 register.register(FrontPageDefiniton);

@@ -10,9 +10,10 @@ class PageRegister {
   }
 
   register(pageDefinition) {
-    const name = pageDefinition.pageName.toLowerCase();
+    const model = pageDefinition.getModel();
+    const name = model.pageName.toLowerCase();
     if (this.pageDefinitions[name] == null) {
-      this.pageDefinitions[name] = pageDefinition;
+      this.pageDefinitions[name] = model;
       return this;
     }
     else throw new Error('PageDefinitionAlreadyRegistered');
