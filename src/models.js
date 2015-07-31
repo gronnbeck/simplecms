@@ -3,6 +3,12 @@ const Schema = mongoose.Schema;
 const PageDefinition = require('./page-definition');
 const pascalCase = require('./pascal-case');
 
+/*
+TODO:
+The types are impl. two places. In pageDefintion.enu and here.
+Don't want that...
+
+*/
 const typeMatching = (attributeType) => {
   switch (attributeType) {
     case 'textArea': return String;
