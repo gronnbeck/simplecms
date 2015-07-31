@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const models = require('./models');
+const api = require('./api');
 
 const PageDefinition = models.PageDefinition.model;
 const PageFactory = models.PageFactory;
@@ -17,8 +18,6 @@ models.PageDefinition.init(FrontPageDefiniton);
 var register = require('./register');
 register.register(FrontPageDefiniton);
 
-// must run after register... not good...
-const api = require('./api');
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/simplecms';
 const PORT = process.env.PORT || 8080;

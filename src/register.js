@@ -6,6 +6,7 @@ class PageRegister {
 
   constructor() {
       this.pageDefinitions = {};
+      this.map = null;
   }
 
   register(pageDefinition) {
@@ -18,16 +19,19 @@ class PageRegister {
   }
 
   getMap() {
+    if (this.map) return this.map;
     const vals = _.values(this.pageDefinitions);
     const pairs = _.map(vals, (pageDef) => {
       const page = PageFactory(pageDef);
       return { name: pageDef.pageName.toLowerCase(), page }
     });
 
-    return _.reduce(pairs, (mem, curr) => {
+    this.map =  _.reduce(pairs, (mem, curr) => {
       mem[curr.name] = curr.page
       return mem
     }, {});
+
+    return this.map;
   }
 
   getDefinition (name) {

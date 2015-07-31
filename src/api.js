@@ -3,8 +3,6 @@ var register = require('./register');
 
 const PageDefinition = models.PageDefinition.model;
 
-const NameToPageMap = register.getMap();
-
 const getPageDefinitions = (req, res) => {
   PageDefinition
     .find({})
@@ -33,7 +31,8 @@ const getPages = (req, res) => {
   if (pageDef === null || pageDef === undefined || pageId == null || pageId === undefined)
     return res.status(404).send(notImplementedMessage);
   else {
-    var page = NameToPageMap[pageDef.toLowerCase()]
+    const nameToPageMap = register.getMap();
+    const page = nameToPageMap[pageDef.toLowerCase()]
     if (page === null || page === undefined)
       return res.status(404).send(notImplementedMessage);
     return  page
